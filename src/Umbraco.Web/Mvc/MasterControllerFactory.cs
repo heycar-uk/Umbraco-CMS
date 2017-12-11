@@ -85,7 +85,7 @@ namespace Umbraco.Web.Mvc
 		public override void ReleaseController(IController controller)
 		{
 			bool released = false;
-				if (controller is Controller)
+				if (controller is Controller && ((Controller)controller).ControllerContext != null)
 				{
 					var requestContext = ((Controller)controller).ControllerContext.RequestContext;
 					var factory = _replicaFactories.Factories.FirstOrDefault(x => x.CanHandle(requestContext));

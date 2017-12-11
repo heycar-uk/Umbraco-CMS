@@ -353,7 +353,13 @@ namespace Umbraco.Core.PropertyEditors
                 case DataTypeDatabaseType.Nvarchar:
                 case DataTypeDatabaseType.Ntext:
                     //put text in cdata
-                    return new XCData(ConvertDbToString(property, propertyType, dataTypeService));
+                    var value = ConvertDbToString(property, propertyType, dataTypeService);
+                    Func<char, bool> isInvalidControlChar = (ch => ch < ' ' && ch != '\t' && ch != '\r' && ch != '\n');
+                    if (value.Any(isInvalidControlChar))
+                    {
+                        value = new String(value.Where(ch => !isInvalidControlChar(ch)).ToArray());
+                    }
+                    return new XCData(value);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

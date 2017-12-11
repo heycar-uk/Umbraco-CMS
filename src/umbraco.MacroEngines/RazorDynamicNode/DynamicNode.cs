@@ -196,7 +196,7 @@ namespace umbraco.MacroEngines
                         List<DynamicNode> selfList = new List<DynamicNode>() { this };
                         return new DynamicNodeList(selfList);
                     }
-                    XmlNode node = doc.SelectSingleNode(string.Format("//*[@id='{0}']", n.Id));
+                    XmlNode node = doc.GetElementById(n.Id.ToString());                    
                     if (node != null)
                     {
                         //got the current node (within the XmlContent instance)
@@ -204,7 +204,7 @@ namespace umbraco.MacroEngines
                         if (nodes.Count > 0)
                         {
                             //we got some resulting nodes
-                            List<NodeFactory.Node> nodeFactoryNodeList = new List<NodeFactory.Node>();
+                            List<NodeFactory.Node> nodeFactoryNodeList = new List<NodeFactory.Node>(nodes.Count);
                             //attempt to convert each node in the set to a NodeFactory.Node
                             foreach (XmlNode nodeXmlNode in nodes)
                             {

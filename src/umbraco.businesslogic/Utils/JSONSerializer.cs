@@ -26,22 +26,17 @@ namespace umbraco.businesslogic.Utils
 	/// </example>
 	public class JSONSerializer : JavaScriptSerializer
 	{
+        private static Regex _prefixesRegex = new Regex(string.Format("(\"{0}(.*?)\")+", PrefixJavaScriptObject),
+            RegexOptions.Multiline
+            | RegexOptions.CultureInvariant
+            | RegexOptions.Compiled
+        );
 
-		public new string Serialize(object obj)
-		{
-			string output = base.Serialize(obj);
-
-			//replaces all strings beginning with this prefix to have no double quotes
-			Regex regex1 = new Regex(string.Format("(\"{0}(.*?)\")+", PrefixJavaScriptObject),
-				RegexOptions.Multiline
-				| RegexOptions.CultureInvariant
-				| RegexOptions.Compiled
-			);
-			string result = regex1.Replace(output, "$2");
-		
-			return result;
-		}
-
+        public new string Serialize(object obj)
+        {
+            return _prefixesRegex.Replace(base.Serialize(obj), "$2");
+        }
+                
 		private const string PrefixJavaScriptObject = "@@@@";
 
 		/// <summary>

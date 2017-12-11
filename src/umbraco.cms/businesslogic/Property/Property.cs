@@ -159,23 +159,25 @@ namespace umbraco.cms.businesslogic.property
             return xml.GetXmlNode(xd);
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+        //[MethodImpl(MethodImplOptions.Synchronized)]
         public static Property MakeNew(PropertyType pt, Content c, Guid versionId)
         {
             int newPropertyId = 0;
             // The method is synchronized
-            using (var sqlHelper = Application.SqlHelper)
-            {
-                sqlHelper.ExecuteNonQuery(
-                    "INSERT INTO cmsPropertyData (contentNodeId, versionId, propertyTypeId) VALUES(@contentNodeId, @versionId, @propertyTypeId)",
-                    sqlHelper.CreateParameter("@contentNodeId", c.Id),
-                    sqlHelper.CreateParameter("@versionId", versionId),
-                    sqlHelper.CreateParameter("@propertyTypeId", pt.Id));
-                newPropertyId = sqlHelper.ExecuteScalar<int>("SELECT MAX(id) FROM cmsPropertyData");
-                interfaces.IData d = pt.DataTypeDefinition.DataType.Data;
-                d.MakeNew(newPropertyId);
-                return new Property(newPropertyId, pt);
-            }
+            //SqlHelper.ExecuteNonQuery("INSERT INTO cmsPropertyData (contentNodeId, versionId, propertyTypeId) VALUES(@contentNodeId, @versionId, @propertyTypeId)",
+            //                          SqlHelper.CreateParameter("@contentNodeId", c.Id),
+            //                          SqlHelper.CreateParameter("@versionId", versionId),
+            //                          SqlHelper.CreateParameter("@propertyTypeId", pt.Id));
+            //newPropertyId = SqlHelper.ExecuteScalar<int>("SELECT MAX(id) FROM cmsPropertyData");
+
+            newPropertyId = SqlHelper.ExecuteScalar<int>("INSERT INTO cmsPropertyData (contentNodeId, versionId, propertyTypeId) VALUES(@contentNodeId, @versionId, @propertyTypeId); SELECT SCOPE_IDENTITY()",
+                                      SqlHelper.CreateParameter("@contentNodeId", c.Id),
+                                      SqlHelper.CreateParameter("@versionId", versionId),
+                                      SqlHelper.CreateParameter("@propertyTypeId", pt.Id));
+
+            IData d = pt.DataTypeDefinition.DataType.Data;
+            d.MakeNew(newPropertyId);
+            return new Property(newPropertyId, pt);
         }
     }
 }

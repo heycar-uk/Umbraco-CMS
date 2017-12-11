@@ -789,7 +789,7 @@ namespace Umbraco.Core.Configuration
 
             //check if the current request matches a route, if so then it is reserved.
             var route = routes.GetRouteData(httpContext);
-            if (route != null)
+            if (route != null && !(route.RouteHandler is StopRoutingHandler))
                 return true;
 
             //continue with the standard ignore routine
