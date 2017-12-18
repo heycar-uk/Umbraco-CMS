@@ -52,6 +52,11 @@ namespace Umbraco.Core.IO
             _uploadAutoFillProperties = new UploadAutoFillProperties(this, logger, contentConfig);
         }
 
+        public void ResetFolderCounter()
+        {
+            _folderCounterInitialized = false;
+        }
+
         internal UploadAutoFillProperties UploadAutoFillProperties { get { return _uploadAutoFillProperties; } }
 
         // note - this is currently experimental / being developed

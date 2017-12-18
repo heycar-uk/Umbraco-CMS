@@ -415,6 +415,11 @@ namespace Umbraco.Core.Sync
                 new { pruneDate, maxId });
 
             _appContext.DatabaseContext.Database.Execute(delete);
+
+            delete = new Sql().Append(@"DELETE FROM umbracoCacheFile WHERE utcStamp < @pruneDate",
+                new { pruneDate });
+
+            _appContext.DatabaseContext.Database.Execute(delete);
         }
 
         /// <summary>
