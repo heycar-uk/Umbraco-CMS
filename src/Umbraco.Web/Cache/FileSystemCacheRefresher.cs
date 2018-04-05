@@ -40,7 +40,7 @@ namespace Umbraco.Web.Cache
             {
                 Umbraco.Core.Logging.LogHelper.Info<FileSystemCacheRefresher>("Update for path {0}, action {1}, file is {2} bytes", () => dto.Path, () => dto.Action, () => dto.Data.Length);
 
-                string targetPath = HttpContext.Current.Server.MapPath(dto.Path);
+                string targetPath = System.Web.Hosting.HostingEnvironment.MapPath(dto.Path);
                 var action = (SyncFileSystemWrapper.Action)dto.Action;
 
                 if (action == SyncFileSystemWrapper.Action.DeleteFile && File.Exists(targetPath))
