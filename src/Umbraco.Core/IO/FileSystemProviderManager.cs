@@ -114,7 +114,7 @@ namespace Umbraco.Core.IO
             var scriptsFileSystem = new PhysicalFileSystem(SystemDirectories.Scripts);
             var xsltFileSystem = new PhysicalFileSystem(SystemDirectories.Xslt);
             var masterPagesFileSystem = new PhysicalFileSystem(SystemDirectories.Masterpages);
-            var mvcViewsFileSystem = new PhysicalFileSystem(SystemDirectories.MvcViews);
+            var mvcViewsFileSystem = new PhysicalFileSystem(SystemDirectories.MvcTemplates);
             var javaScriptLibraryFileSystem = new PhysicalFileSystem(Path.Combine(SystemDirectories.Umbraco, "lib"));
 
             _macroPartialFileSystem = new ShadowWrapper(macroPartialFileSystem, "Views/MacroPartials", ScopeProvider);
@@ -125,7 +125,7 @@ namespace Umbraco.Core.IO
             _scriptsFileSystem = new ShadowWrapper(scriptsFileSystem, "scripts", ScopeProvider);
             _xsltFileSystem = new ShadowWrapper(xsltFileSystem, "xslt", ScopeProvider);
             _masterPagesFileSystem = new ShadowWrapper(masterPagesFileSystem, "masterpages", ScopeProvider);
-            _mvcViewsFileSystem = new ShadowWrapper(mvcViewsFileSystem, "Views", ScopeProvider);
+            _mvcViewsFileSystem = new ShadowWrapper(mvcViewsFileSystem, "Views/Templates", ScopeProvider);
             _javaScriptLibraryFileSystem = new ShadowWrapper(javaScriptLibraryFileSystem, "Lib", ScopeProvider);
 
             // filesystems obtained from GetFileSystemProvider are already wrapped and do not need to be wrapped again

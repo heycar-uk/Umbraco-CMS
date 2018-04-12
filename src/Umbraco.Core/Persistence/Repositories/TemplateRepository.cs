@@ -760,7 +760,7 @@ namespace Umbraco.Core.Persistence.Repositories
 
             // get valid paths
             var validDirs = _templateConfig.DefaultRenderingEngine == RenderingEngine.Mvc
-                ? new[] { SystemDirectories.Masterpages, SystemDirectories.MvcViews }
+                ? new[] { SystemDirectories.Masterpages, SystemDirectories.MvcTemplates }
                 : new[] { SystemDirectories.Masterpages };
 
             // get valid extensions

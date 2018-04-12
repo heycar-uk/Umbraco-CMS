@@ -96,6 +96,14 @@ namespace Umbraco.Core.IO
 			}
 		}
 
+        public static string MvcTemplates
+        {
+            get
+            {
+                return MvcViews + "/Templates";
+            }
+        }
+
         public static string PartialViews
         {
             get

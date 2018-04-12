@@ -15,11 +15,11 @@ namespace Umbraco.Web.Mvc
     public class RenderViewEngine : ReflectedFixedRazorViewEngine
 	{
 
-		private readonly IEnumerable<string> _supplementedViewLocations = new[] { "/{0}.cshtml" };
+		private readonly IEnumerable<string> _supplementedViewLocations = new[] { "/Templates/{0}.cshtml" };
 		//NOTE: we will make the main view location the last to be searched since if it is the first to be searched and there is both a view and a partial
 		// view in both locations and the main view is rendering a partial view with the same name, we will get a stack overflow exception. 
 		// http://issues.umbraco.org/issue/U4-1287, http://issues.umbraco.org/issue/U4-1215
-		private readonly IEnumerable<string> _supplementedPartialViewLocations = new[] { "/Partials/{0}.cshtml", "/MacroPartials/{0}.cshtml", "/{0}.cshtml" };
+		private readonly IEnumerable<string> _supplementedPartialViewLocations = new[] { "/Partials/{0}.cshtml", "/MacroPartials/{0}.cshtml", "/Templates/{0}.cshtml" };
 
 		/// <summary>
 		/// Constructor

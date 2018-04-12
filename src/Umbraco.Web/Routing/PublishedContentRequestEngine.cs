@@ -354,7 +354,7 @@ namespace Umbraco.Web.Routing
 
             // NOTE: we could start with what's the current default?
 
-            if (FindTemplateRenderingEngineInDirectory(new DirectoryInfo(IOHelper.MapPath(SystemDirectories.MvcViews)),
+            if (FindTemplateRenderingEngineInDirectory(new DirectoryInfo(IOHelper.MapPath(SystemDirectories.MvcTemplates)),
                     alias, new[] { ".cshtml", ".vbhtml" }))
                 return RenderingEngine.Mvc;
 

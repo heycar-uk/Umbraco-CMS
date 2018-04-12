@@ -1687,7 +1687,7 @@ namespace Umbraco.Core.Services
 
         private string ViewPath(string alias)
         {
-            return SystemDirectories.MvcViews + "/" + alias.Replace(" ", "") + ".cshtml";
+            return SystemDirectories.MvcTemplates + "/" + alias.Replace(" ", "") + ".cshtml";
         }
 
         private string MasterpagePath(string alias)
