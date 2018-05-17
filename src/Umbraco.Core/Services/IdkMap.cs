@@ -20,6 +20,25 @@ namespace Umbraco.Core.Services
             _uowProvider = uowProvider;
         }
 
+        public void PopulateCache(IEnumerable<Tuple<Guid, int>> mappings, UmbracoObjectTypes umbracoObjectType)
+        {
+            try
+            {
+                _locker.EnterWriteLock();
+
+                foreach (var mapping in mappings)
+                {
+                    _id2Key[mapping.Item2] = new TypedId<Guid>(mapping.Item1, umbracoObjectType);
+                    _key2Id[mapping.Item1] = new TypedId<int>(mapping.Item2, umbracoObjectType);
+                }
+            }
+            finally
+            {
+                if (_locker.IsWriteLockHeld)
+                    _locker.ExitWriteLock();
+            }
+        }
+
         // note - no need for uow, scope would be enough, but a pain to wire
         // note - for pure read-only we might want to *not* enforce a transaction?
 

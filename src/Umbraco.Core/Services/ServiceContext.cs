@@ -511,5 +511,10 @@ namespace Umbraco.Core.Services
         /// Gets the <see cref="IConsentService"/> implementation.
         /// </summary>
         public IConsentService ConsentService => _consentService.Value;
+
+        public IdkMap GetIdkMap()
+        {
+            return IdkMap;
+        }
     }
 }
