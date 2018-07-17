@@ -9,6 +9,7 @@ namespace Umbraco.Web.PropertyEditors
     internal static class NestedContentHelper
     {
         private const string CacheKeyPrefix = "Umbraco.Web.PropertyEditors.NestedContent.GetPreValuesCollectionByDataTypeId_";
+        private const string CacheKeyPrefixContentType = "Umbraco.Web.PropertyEditors.NestedContent.GetContentTypeFromItem_";
 
         public static PreValueCollection GetPreValuesCollectionByDataTypeId(int dtdId)
         {
@@ -44,7 +45,9 @@ namespace Umbraco.Web.PropertyEditors
                 return null;
             }
 
-            return ApplicationContext.Current.Services.ContentTypeService.GetContentType(contentTypeAlias);
+            return ApplicationContext.Current.ApplicationCache.RequestCache.GetCacheItem(
+                CacheKeyPrefixContentType + contentTypeAlias,
+                () => ApplicationContext.Current.Services.ContentTypeService.GetContentType(contentTypeAlias)) as IContentType;            
         }
 
         #region Conversion from v0.1.1 data formats

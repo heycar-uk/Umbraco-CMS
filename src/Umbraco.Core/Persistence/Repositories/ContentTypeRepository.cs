@@ -33,7 +33,7 @@ namespace Umbraco.Core.Persistence.Repositories
         protected override IContentType PerformGet(int id)
         {
             //use the underlying GetAll which will force cache all content types
-            return GetAll().FirstOrDefault(x => x.Id == id);
+            return GetAll(id).FirstOrDefault(x => x.Id == id);
         }
 
         protected override IEnumerable<IContentType> PerformGetAll(params int[] ids)
