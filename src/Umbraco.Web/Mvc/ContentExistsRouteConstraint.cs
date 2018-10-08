@@ -33,11 +33,14 @@ namespace Umbraco.Web.Mvc
                 return false;
             }
 
-            using (new ReadLock(_lock))
+            if (!umbracoContext.InPreviewMode)
             {
-                if (_failedMatches.Contains(umbracoContext.CleanedUmbracoUrl.GetLeftPart(UriPartial.Path)))
+                using (new ReadLock(_lock))
                 {
-                    return false;
+                    if (_failedMatches.Contains(umbracoContext.CleanedUmbracoUrl.GetLeftPart(UriPartial.Path)))
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -61,11 +64,14 @@ namespace Umbraco.Web.Mvc
             }
             else
             {
-                using (new WriteLock(_lock))
+                if (!umbracoContext.InPreviewMode)
                 {
-                    _failedMatches.Add(umbracoContext.CleanedUmbracoUrl.GetLeftPart(UriPartial.Path));
+                    using (new WriteLock(_lock))
+                    {
+                        _failedMatches.Add(umbracoContext.CleanedUmbracoUrl.GetLeftPart(UriPartial.Path));
+                    }
                 }
-
+                
                 return false;
             }
         }
