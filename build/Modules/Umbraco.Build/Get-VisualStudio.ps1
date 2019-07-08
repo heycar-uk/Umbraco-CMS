@@ -12,7 +12,10 @@ function Get-VisualStudio($vswhere)
   $vsVerParts = $vsVer.Split('.')
   $vsMajor = [int]::Parse($vsVerParts[0])
   $vsMinor = [int]::Parse($vsVerParts[1])
-  if ($vsMajor -eq 15) {
+  if ($vsMajor -eq 16) {
+    $msBuild = "$vsPath\MSBuild\Current\Bin"
+  }
+  elseif ($vsMajor -eq 15) {
     $msBuild = "$vsPath\MSBuild\$vsMajor.$vsMinor\Bin"
   }
   elseif ($vsMajor -eq 14) {
