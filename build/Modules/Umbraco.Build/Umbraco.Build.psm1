@@ -191,10 +191,6 @@ function Compile-Umbraco
   }
   
   $toolsVersion = "4.0"
-  if ($uenv.VisualStudio.Major -eq 16)
-  {
-    $toolsVersion = "Current"
-  }
   if ($uenv.VisualStudio.Major -eq 15)
   {
     $toolsVersion = "15.0"
