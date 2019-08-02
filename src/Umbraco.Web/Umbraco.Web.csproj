@@ -287,6 +287,7 @@
     <Compile Include="BatchedDatabaseServerMessengerStartup.cs" />
     <Compile Include="Cache\ApplicationCacheRefresher.cs" />
     <Compile Include="Cache\ApplicationTreeCacheRefresher.cs" />
+    <Compile Include="Cache\ArbitraryCacheRefresher.cs" />
     <Compile Include="Cache\CacheRefresherEventHandler.cs" />
     <Compile Include="Cache\ContentTypeCacheRefresher.cs" />
     <Compile Include="Cache\DataTypeCacheRefresher.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Cache\DistributedCache.cs" />
     <Compile Include="Cache\DistributedCacheExtensions.cs" />
     <Compile Include="Cache\DomainCacheRefresher.cs" />
+    <Compile Include="Cache\FileSystemCacheRefresher.cs" />
     <Compile Include="Cache\LanguageCacheRefresher.cs" />
     <Compile Include="Cache\MacroCacheRefresher.cs" />
     <Compile Include="Cache\MediaCacheRefresher.cs" />
@@ -308,6 +310,7 @@
     <Compile Include="Cache\TemplateCacheRefresher.cs" />
     <Compile Include="Cache\UnpublishedPageCacheRefresher.cs" />
     <Compile Include="Cache\UserCacheRefresher.cs" />
+    <Compile Include="Mvc\ContentExistsRouteConstraint.cs" />
     <Compile Include="Mvc\HttpUmbracoFormRouteStringException.cs" />
     <Compile Include="Mvc\ValidateUmbracoFormRouteStringAttribute.cs" />
     <Compile Include="Editors\PreviewController.cs" />
@@ -343,6 +346,8 @@
     <Compile Include="Models\Trees\ExportMember.cs" />
     <Compile Include="PropertyEditors\DropdownFlexiblePropertyEditor.cs" />
     <Compile Include="Security\UmbracoAntiForgeryAdditionalDataProvider.cs" />
+    <Compile Include="SyncFileSystem\CacheFileDto.cs" />
+    <Compile Include="SyncFileSystem\SyncFileSystemWrapper.cs" />
     <Compile Include="TourFilterResolver.cs" />
     <Compile Include="Editors\UserEditorAuthorizationHelper.cs" />
     <Compile Include="Editors\UserGroupAuthorizationAttribute.cs" />
@@ -2012,6 +2017,7 @@
     <VSToolsPath Condition="exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\WebApplications\Microsoft.WebApplication.targets')">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0</VSToolsPath>
     <VSToolsPath Condition="exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0\WebApplications\Microsoft.WebApplication.targets')">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0</VSToolsPath>
     <VSToolsPath Condition="exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v15.0\WebApplications\Microsoft.WebApplication.targets')">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v15.0</VSToolsPath>
+    <VSToolsPath Condition="exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v16.0\WebApplications\Microsoft.WebApplication.targets')">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v16.0</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
