@@ -30,7 +30,9 @@ namespace Umbraco.Web.Mvc
             var instance = factory.CreateController(requestContext, controllerName);
             if (instance != null)
             {
-                return instance.GetType();            
+                var result = instance.GetType();
+                factory.ReleaseController(instance);
+                return result;
             }
             return null;
         }
